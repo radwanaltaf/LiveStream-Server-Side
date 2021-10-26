@@ -26,11 +26,13 @@ with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
     SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = getenv("IS_DEVELOPMENT", True)
+# True for Debugging
+DEBUG = getenv("IS_DEVELOPMENT", False)
 
 ALLOWED_HOSTS = [
     # getenv("APP_HOST")
-    
+    'premiumoutletslive.com',
+    '151.106.112.221'
 ]
 
 
