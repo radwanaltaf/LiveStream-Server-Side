@@ -1,0 +1,592 @@
+.vjs-tech { object-fit: cover  !important; }
+
+#logsWrapper {
+    max-height: 500px;
+    overflow: auto;
+}
+
+.log-item {
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.border-rad-round {
+    border-radius: 20px;
+}
+
+.log-item:nth-child(2n) {
+    background: #e6e6e6;
+}
+
+.prefix-log {
+    color: black;
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.info-log {
+    color: #17a2b8;
+}
+
+.success-log {
+    color: green;
+}
+
+.error-log {
+    color: red;
+}
+
+.liveStreamMainVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 40px;
+    border: 1px solid #888;
+    width: 80%;
+    margin-top: 40vh;
+    border-radius: 30px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Loading Spinner */
+.loading {
+    position: fixed;
+    z-index: 999;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+}
+
+/* Transparent Overlay */
+.loading:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    backdrop-filter: blur(40px);
+}
+
+/* :not(:required) hides these rules from IE9 and below */
+.loading:not(:required) {
+    /* hide "loading..." text */
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+.loading:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 10px;
+    width: 50px;
+    height: 50px;
+    margin-top: -0.5em;
+    border: 15px solid rgba(33, 150, 243, 1.0);
+    border-radius: 100%;
+    border-bottom-color: transparent;
+    -webkit-animation: spinner 1s linear 0s infinite;
+    animation: spinner 1s linear 0s infinite;
+
+
+}
+
+
+/* Loading Spinner LS END*/
+.loading-ls-end {
+    position: fixed;
+    z-index: 999;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+}
+
+/* Transparent Overlay */
+.loading-ls-end:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    backdrop-filter: blur(5px);
+}
+
+/* :not(:required) hides these rules from IE9 and below */
+.loading-ls-end:not(:required) {
+    /* hide "loading..." text */
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+.loading-ls-end:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 10px;
+    width: 50px;
+    height: 50px;
+    margin-top: -0.5em;
+    border-radius: 100%;
+    border-bottom-color: transparent;
+    -webkit-animation: spinner 1s linear 0s infinite;
+    animation: spinner 1s linear 0s infinite;
+
+}
+
+
+/* Animation */
+
+@-webkit-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+/* CART LOADING SPINNER */
+
+.loading-cart {
+    position: absolute;
+    z-index: 999;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+}
+
+/* Transparent Overlay */
+.loading-cart:before {
+    position: absolute;
+    content: '';
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    /* backdrop-filter: blur(10px); */
+}
+
+/* :not(:required) hides these rules from IE9 and below */
+.loading-cart:not(:required) {
+    /* hide "loading..." text */
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+.loading-cart:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 10px;
+    width: 50px;
+    height: 50px;
+    margin-top: -0.5em;
+    border: 15px solid rgba(33, 150, 243, 1.0);
+    border-radius: 100%;
+    border-bottom-color: transparent;
+    -webkit-animation: spinner 1s linear 0s infinite;
+    animation: spinner 1s linear 0s infinite;
+
+
+}
+
+
+body {
+    overflow: hidden; /* Hide scrollbars */
+}
+
+.video-overlay {
+    position: fixed;
+    /* left: 0px; */
+    top: 93vh;
+    /* margin: 0.5vh; */
+    margin-left: 5px;
+    max-width: 100vw !important;
+    color: #FFF;
+    /* width: 100vw; */
+    /* background-color: rgba(50, 50, 50, 0.7); */
+}
+
+.overlay-cart {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    left: 0px;
+    top: 200vh;
+    transition: 1s;
+    /* margin: 10px; */
+    width: 100vw;
+    height: 72vh;
+    padding: 15px 15px;
+    color: #FFF;
+    z-index: 99999;
+}
+
+.overlay-message-box {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    left: 0px;
+    /* top: 60vh; */
+    bottom: 14vh;
+    transition: 1s;
+    /* margin: 10px; */
+    width: 75vw;
+    height: 25vh;
+    color: #FFF;
+    /* background-color: pink; */
+    /* display: none; */
+}
+
+.message-box {
+    background-color: rgba(50, 50, 50, 0.5);
+    font-size: 40px !important;   
+}
+
+.nounderline {
+    text-decoration: none !important
+  }
+
+.shop-bag {
+    flex-grow: 1;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.shop-cart-icon {
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.round-borders {
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+}
+
+.shop-bag-color {
+    background-color: #aa005d;
+}
+
+.chat-box {
+    flex-grow: 2;
+    align-items: center;
+    justify-content: center;
+    border-radius: 60px;
+    /* width: 70vw; PHASE 2 SHARE BOX*/
+    width: 90vw;
+
+}
+
+.custom-font-icon {
+    font-size: 80px !important;
+}
+
+.custom-font-chat {
+    font-size: 50px !important;
+    background-color: rgba(50, 50, 50, 0.8);
+}
+
+.light-black-col {
+    background-color: rgba(50, 50, 50, 0.9);
+}
+
+.message-input {
+    outline: none;
+    color: white;
+    /* width: 60% ; */
+}
+
+::placeholder {
+      color: rgba(255, 255, 255, 0.8);
+      opacity: 0.8;
+}
+
+.modal-font-size {
+    font-size: 40px;
+}
+
+.btn-custom {
+    font-size: 50px;
+}
+
+
+.prod-thumbnail {
+    width: 20vw;
+}
+
+.heading-static {
+    font-size: 70px;
+}
+
+.empty-cart-text {
+    font-size: 40px;
+    color: #aaa;
+}
+
+.center-in-cart {
+    position: relative;
+    top: 20vh;
+}
+
+.font-price {
+    font-size: 34px;
+}
+
+.font-ori-price {
+    font-size: 28px;
+    text-decoration: line-through;
+}
+
+.font-discount {
+    font-size: 28px;
+    color: #aa005d;
+}
+
+.desc-font {
+    font-size: 38px;
+}
+
+.basket-icon-cart {
+    font-size: 60px;
+}
+
+.viewers-capsule-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 30px;
+    top: 10vh;
+    transition: 1s;
+    margin: 10px;
+    /* width: 100%; */
+    /* height: 72vh; */
+    padding: 15px 15px;
+    color: #FFF;
+}
+
+.live-capsule {
+    background-color: #9F005B;
+    color: white;
+    border-radius: 40px;
+    z-index: 1;
+    font-size: 40px;
+}
+
+.viewers-capsule {
+    background-color: rgba(0, 0, 0, 0.61);
+    color: white;
+    position: absolute;
+    left: 16vw;
+    border-radius: 40px;
+    font-size: 40px;
+    
+}
+
+.ellipse-icon {
+    font-size: 30px;
+}
+
+.user-icon {
+    font-size: 45px;
+}
+
+.sticky {
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    top: 200vh;
+    right: 0px;
+    transition: 1s;
+
+}
+
+.round-borders-nav {
+    border-top-left-radius: 70px;
+    border-top-right-radius: 100px;
+}
+
+.num-font {
+    font-size: 30px;
+    background-color: rgba(0, 0, 0, 0.41);
+    color: white;
+}
+
+.img-cust {
+    width: 200px!important;
+    width: 200px!important;
+}
+
+@media screen and (max-height: 1650px) {
+    .video-overlay {
+        top: 85vh !important;
+    }
+}
+
+@media screen and (max-height: 1450px) {
+    .video-overlay {
+        top: 82vh !important;
+    }
+
+    .overlay-message-box {
+        bottom: 20vh !important;
+    }
+}
+
+@media screen and (max-height: 1250px) {
+    .video-overlay {
+        top: 79vh !important;
+    }
+
+    .overlay-message-box {
+        bottom: 23vh !important;
+    }
+}
+  
+
+@media screen and (max-height: 1050px) {
+    .video-overlay {
+        top: 75vh !important;
+    }
+
+    .overlay-message-box {
+        bottom: 26vh !important;
+    }
+}
+
+@media screen and (max-height: 850px) {
+    .video-overlay {
+        top: 71vh !important;
+    }
+
+    .overlay-message-box {
+        bottom: 29vh !important;
+    }
+}

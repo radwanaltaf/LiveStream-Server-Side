@@ -1,0 +1,209 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta
+		name="viewport" 
+      	content="
+		  maximum-scale=1.0,
+		  user-scalable=0">
+		<!-- <title>Title</title> -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined">
+		<link rel="stylesheet" href={% static "GPO_CUSTOM_LS_LIB/styles.css" %}>
+
+	</head>
+
+	<body>
+
+		<div id="loadingSpinner" class="loading">Loading&#8230;</div>
+
+		<div id="myModal" class="modal">
+			<div class="modal-content">
+				<!-- <span class="close"></span> -->
+				<p
+				id="myModalSpan"
+				class="mx-auto modal-font-size">Tap anywhere on the screen to unmute</p>
+			</div>
+		</div>
+
+		<!-- CUSTOM VIDEO PLAYER BEGINS HERE -->
+		<div class="row">
+			<div class="col-sm-12">
+				<video id="playerViewWrapper" webkit-playsinline="true" class="liveStreamMainVideo video-js"
+					oncontextmenu="return false;" preload="auto" playsinline="true" disablePictureInPicture width="640"
+					height="480">
+					<p class="vjs-no-js">
+						To view this video please enable JavaScript, and consider upgrading to a
+						web browser that
+						<a href="https://videojs.com/html5-video-support/" target="_blank">
+							supports HTML5 video
+						</a>
+					</p>
+				</video>
+
+				<div class="viewers-capsule-container d-flex flex-row">
+					<div class="live-capsule pl-4 pr-5 py-1 d-flex align-items-center">
+						<i class="material-icons ellipse-icon mr-3">
+							circle
+						</i>
+						<span id="streamType"></span>
+					</div>
+
+					<div class="viewers-capsule pl-4 pr-5 py-1 d-flex align-items-center">
+						<i class="material-icons-outlined user-icon pl-3 ml-4 mr-3">
+							person
+						</i>
+						<span id="viewCount"></span>
+					</div>
+				</div>
+
+				<!-- OVER LAY STARTS HERE -->
+				<div
+				id="vid-overlay-main"
+				class="video-overlay d-flex flex-row px-2">
+					
+					<!-- bg-primary -->
+					<div
+					onclick="openCartModal()"
+					class="shop-bag shop-bag-color p-3 mr-4">
+						<i class="custom-font-icon material-icons-outlined">
+							shopping_bag
+						</i>
+					</div>
+
+					<!-- bg-info  -->
+					<div class="custom-font-chat d-flex flex-row chat-box mr-4 pl-5 overflow-auto">
+						<input
+						onclick="onMsgBoxClick()"
+						oninput="onInputChanged()"
+						class="message-input overflow-auto bg-transparent border-0"
+						id="messageInput"
+						placeholder="Say Something" value="" />
+
+						<button
+						disabled
+						id="send-btn"
+						type="button"
+						onclick="sendLiveMessage()"
+						class="btn-custom btn btn-link pr-5 nounderline">Send</button>
+					</div>
+					
+					<!-- bg-secondary --PHASE 2 -->
+					<!-- <div class="shop-bag light-black-col p-3 ml-auto">
+						<i class="custom-font-icon material-icons-outlined">
+							share
+						</i>
+					</div> -->
+
+					<!-- bg-danger  -->
+					<!-- <div class="shop-bag p-3 light-black-col">
+						<i class="custom-font-icon material-icons-outlined">
+							shopping_bag
+						</i>
+					</div> -->
+
+
+				</div>
+
+
+				<!-- CART OVERLAY STARTS HERE -->
+				<div
+				id="cartContainer"
+				class="overlay-cart bg-white text-dark round-borders px-4 py-5 mb-4 overflow-auto">
+					<div class="d-flex flex-row align-items-center mb-5 px-4">
+						<span class="heading-static">Products</span>
+						<i
+						onclick="closeCartModal()"
+						class="material-icons-outlined ml-auto heading-static">
+							close
+						</i>
+					</div>
+
+					<hr style="border: 1px solid gray; width: 100%;">
+
+					<div id="dynamicContainer"></div>
+
+				</div>
+
+				<div
+				id="messageBox"
+				class="overlay-message-box pl-2 pr-5 py-5 mb-4 overflow-auto">
+					<div
+					id="dynamicMsgBox"
+					class="d-flex flex-column mb-5 px-2">
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<!-- All JavaScript Goes Here: -->
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+			integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+		</script>
+
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+		</script>
+
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+			integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+		</script>
+
+		<script src={% static "GPO_CUSTOM_LS_LIB/sdk-viewer.js" %} type="text/javascript"></script>
+
+		<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+
+		<script src={% static "GPO_CUSTOM_LS_LIB/custom-script.js" %} type="text/javascript">
+        </script>
+
+        <script>
+            console.log('title: ', {{title}})
+            console.log('brandId: ', {{brandId}})
+            console.log('name: ', {{username}})
+            console.log('guest: ', {{isGuest}})
+        </script>
+
+
+
+
+	</body>
+
+</html>
+
+
+
+
+<!-- PRODUCT ROW GRID -->
+<!-- <div class="d-flex flex-row align-items-center p-2">
+
+	<div class="prod-thumbnail mr-4">
+		<img src="https://www.stylebysavina.com/wp-content/uploads/2020/12/neutral-outfit-19.png" class="img-fluid rounded" alt="Responsive image">
+
+	</div>
+	<div class="prod-desc mr-4">
+		<span class="desc-font">Valentino by Mario Valentino Mia Logo Leather Camera Bag</span>
+
+		<br>
+		<span class="font-price">MYR 1000</span>
+		<br>
+		<span class="font-discount">50% Off</span>
+
+	</div>
+
+	<div class="shop-cart-icon ml-auto bg-dark text-white p-3">
+		<i class="material-icons-outlined basket-icon-cart">
+			shopping_basket
+		</i>
+		
+	</div>
+	
+</div>
+<hr style="border: 1px solid gray; width: 100%;"> -->
