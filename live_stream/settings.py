@@ -32,6 +32,7 @@ DEBUG = getenv("IS_DEVELOPMENT", False)
 ALLOWED_HOSTS = [
     # getenv("APP_HOST")
     'premiumoutletslive.com',
+    'www.premiumoutletslive.com',
     '151.106.112.221'
 ]
 
