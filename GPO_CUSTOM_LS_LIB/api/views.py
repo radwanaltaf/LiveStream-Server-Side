@@ -16,17 +16,12 @@ from GPO_CUSTOM_LS_LIB.api.serializers import UserSerializer
 # If want to save to DB table user then execute --> serializer.save()
 
 def api_create_user_view(request):
-    user = User(
-        titleG = 'MyRoom',
-        brandIdG = 123,
-        usernameG = 'UsernameRadwan',
-        isGuestG = True
-    )
+    user = User()
     if request.method == "POST":
-        print('requestrads')
-        # print(request.data) 
-        serializer = UserSerializer(user, data=request.data)
+        print(request.data) 
+        serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
+            print(serializer.data)
             # print(request.data)
             # print(serializer.data.get('isGuestG'))
             if len(request.data) == 4:
@@ -35,5 +30,6 @@ def api_create_user_view(request):
                     "brandId": serializer.data.get('brandIdG'),
                     "username": serializer.data.get('usernameG'),
                     "isGuest": serializer.data.get('isGuestG')
-                })            
+                })
+            print(request.data) 
             return Response({"ErrorMessage": 'Required Fields Missing'}, status = status.HTTP_400_BAD_REQUEST)

@@ -40,10 +40,11 @@ let sdkViewerInstance = new SdkViewer({
 });
 
 // Dynamically from POST Req API (Req data received)
-let titleG = 'Live demo 24';
-let brandIdG = 76;
-let usernameG = '';
-let isGuestG;
+// let titleG = 'Live demo 24'
+let titleG = document.getElementById("title").value;
+let brandIdG = document.getElementById("brandId").value;
+let usernameG = document.getElementById("username").value;
+let isGuestG = document.getElementById("isGuest").value;
 
 // Stays Same
 let passwordG = 'Testing1';
