@@ -27,9 +27,11 @@ with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # True for Debugging
+# EnvPD
 DEBUG = getenv("IS_DEVELOPMENT", False)
 
 ALLOWED_HOSTS = [
+    # EnvPD
     # getenv("APP_HOST")
     'premiumoutletslive.com',
     'www.premiumoutletslive.com',
@@ -87,6 +89,7 @@ WSGI_APPLICATION = 'live_stream.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    # EnvPD
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
@@ -136,6 +139,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+# EnvPD
 # STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_ROOT = "/DjangoLiveStream/site/public/static"
 STATIC_URL = '/static/'

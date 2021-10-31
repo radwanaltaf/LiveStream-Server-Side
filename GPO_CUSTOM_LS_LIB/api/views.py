@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 
 from GPO_CUSTOM_LS_LIB.models import User 
 from GPO_CUSTOM_LS_LIB.api.serializers import UserSerializer
+from django.http import HttpResponse
 
 @api_view(['POST', ])
 
@@ -25,11 +26,11 @@ def api_create_user_view(request):
             # print(request.data)
             # print(serializer.data.get('isGuestG'))
             if len(request.data) == 4:
-                return render(request ,"GPO_CUSTOM_LS_LIB/viewer.html", {
+                return HttpResponse(render(request ,"GPO_CUSTOM_LS_LIB/viewer.html", {
                     "title": serializer.data.get('titleG'),
                     "brandId": serializer.data.get('brandIdG'),
                     "username": serializer.data.get('usernameG'),
                     "isGuest": serializer.data.get('isGuestG')
-                })
+                }))
             print(request.data) 
             return Response({"ErrorMessage": 'Required Fields Missing'}, status = status.HTTP_400_BAD_REQUEST)
