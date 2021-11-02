@@ -30,7 +30,7 @@ def api_create_user_view(request):
                     "title": serializer.data.get('titleG'),
                     "brandId": serializer.data.get('brandIdG'),
                     "username": serializer.data.get('usernameG'),
-                    "isGuest": serializer.data.get('isGuestG')
+                    "isGuest": 't' if serializer.data.get('isGuestG') == True else 'f'
                 }))
             print(request.data) 
             return Response({"ErrorMessage": 'Required Fields Missing'}, status = status.HTTP_400_BAD_REQUEST)
