@@ -457,7 +457,9 @@ async function renderEachProduct() {
 
 // eslint-disable-next-line no-unused-vars
 function sendLiveMessage() {
-    if (isGuestG === false || isGuestG === 'false') {
+    console.log('CLICK')
+    if (isGuestG === false || isGuestG === 'false' ||
+        isGuestG === 'False' || isGuestG === 'False') {
         let message = {
             message: `${usernameG + ': ' + document.getElementById('messageInput').value}`,
             messageType: 1, // 1 for send text message
@@ -475,7 +477,8 @@ function sendLiveMessage() {
         } else {
             console.log('Please type something!');
         }
-    } else if (isGuestG === true || isGuestG === 'true') {
+    } else if (isGuestG === true || isGuestG === 'true' ||
+            isGuestG === 'True' || isGuestG === 'True') {
         window.ReactNativeWebView.postMessage('navToLogin');
     }
 
