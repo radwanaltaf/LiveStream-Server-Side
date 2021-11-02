@@ -28,14 +28,14 @@ with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 # True for Debugging
 # EnvPD
-DEBUG = getenv("IS_DEVELOPMENT", True)
+DEBUG = getenv("IS_DEVELOPMENT", False)
 
 ALLOWED_HOSTS = [
     # EnvPD
     # getenv("APP_HOST")
-    # 'premiumoutletslive.com',
-    # 'www.premiumoutletslive.com',
-    # '151.106.112.221'
+    'premiumoutletslive.com',
+    'www.premiumoutletslive.com',
+    '151.106.112.221'
 ]
 
 
@@ -90,16 +90,16 @@ WSGI_APPLICATION = 'live_stream.wsgi.application'
 
 DATABASES = {
     # EnvPD
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
     # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'OPTIONS': {
-    #         'read_default_file': '/DjangoLiveStream/auth/mysql.cnf'
-    #     },
-    # }    
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': '/DjangoLiveStream/auth/mysql.cnf'
+        },
+    }    
 }
 
 
@@ -140,8 +140,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 # EnvPD
-STATIC_ROOT = BASE_DIR / "staticfiles"
-# STATIC_ROOT = "/DjangoLiveStream/site/public/static"
+# STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = "/DjangoLiveStream/site/public/static"
 STATIC_URL = '/static/'
 
 # Default primary key field type
