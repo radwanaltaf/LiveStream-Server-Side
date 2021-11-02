@@ -459,7 +459,7 @@ async function renderEachProduct() {
 function sendLiveMessage() {
     console.log('CLICK')
     if (isGuestG === false || isGuestG === 'false' ||
-        isGuestG === 'False' || isGuestG === 'False') {
+        isGuestG === 'false' || isGuestG === 'False') {
         let message = {
             message: `${usernameG + ': ' + document.getElementById('messageInput').value}`,
             messageType: 1, // 1 for send text message
@@ -478,7 +478,7 @@ function sendLiveMessage() {
             console.log('Please type something!');
         }
     } else if (isGuestG === true || isGuestG === 'true' ||
-            isGuestG === 'True' || isGuestG === 'True') {
+            isGuestG === 'true' || isGuestG === 'True') {
         window.ReactNativeWebView.postMessage('navToLogin');
     }
 
