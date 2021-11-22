@@ -468,6 +468,8 @@ function sendLiveMessage() {
                 console.log(res);
                 if (res.status === 'Success') {
                     document.getElementById('messageInput').value = '';
+                    let msgBoxContainer = document.getElementById('messageBox');
+                    msgBoxContainer.scroll({top: msgBoxContainer.scrollHeight, behavior: 'smooth'})
                     document.getElementById('send-btn').disabled = true;
                     let mainCB = document.getElementsByClassName('vjs-control-bar')[0];
                     mainCB !== undefined ? mainCB.style.visibility = 'visible' : null;
