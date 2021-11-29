@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         if (event.target === document.getElementById('messageBox') ||
         event.target === document.getElementById('dynamicMsgBox') ||
         event.target === document.getElementById('dynamicMsgText')) {
-            document.getElementById('messageBox').style.height = '25vh';
+            document.getElementById('messageBox').style.height = '34vh';
             console.log(event);
             let mainCB = document.getElementsByClassName('vjs-control-bar')[0];
             mainCB !== undefined ? mainCB.style.visibility = 'visible' : null;
@@ -404,7 +404,7 @@ async function renderEachProduct() {
                     <div class="prod-desc mr-4">
                         <span class="desc-font">${post.name}</span>
                         <br>
-                        <span class="font-price mr-3">MYR ${specialPrice.value ? ~~specialPrice.value : ~~post.price}</span>
+                        <span class="font-price mr-3">MYR ${specialPrice.value ? parseFloat(specialPrice.value).toFixed(2) : parseFloat(post.price).toFixed(2)}</span>
 
                         ${discVal !== 0 ? `
                         <span class="font-ori-price">
