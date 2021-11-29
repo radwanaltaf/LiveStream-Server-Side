@@ -404,7 +404,7 @@ async function renderEachProduct() {
                     <div class="prod-desc mr-4">
                         <span class="desc-font">${post.name}</span>
                         <br>
-                        <span class="font-price mr-3">MYR $</span>
+                        <span class="font-price mr-3">MYR ${specialPrice.value ? parseFloat(specialPrice.value).toFixed(2) : parseFloat(post.price).toFixed(2)}</span>
 
                         ${discVal !== 0 ? `
                         <span class="font-ori-price">
