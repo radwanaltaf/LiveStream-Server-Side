@@ -408,7 +408,7 @@ async function renderEachProduct() {
 
                         ${discVal !== 0 ? `
                         <span class="font-ori-price">
-                        MYR ${ ~~post.price}
+                        MYR ${ parseFloat(post.price).toFixed(2) }
                         </span>` : ''}
 
                         
