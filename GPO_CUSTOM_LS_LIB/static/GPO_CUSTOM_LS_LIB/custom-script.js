@@ -70,9 +70,9 @@ function handleSDKEvents() {
     sdkViewerInstance.onEventHandler(
         'ON_UPDATE_STATISTICS', (data) => {
             console.log('UPDATE STATISTICS: ', data);
-            document.getElementById('loadingSpinner').style.display = 'none';
-            let myModapMainCust = document.getElementById('myModal');
-            myModapMainCust.style.display = 'none';
+            // document.getElementById('loadingSpinner').style.display = 'none';
+            // let myModapMainCust = document.getElementById('myModal');
+            // myModapMainCust.style.display = 'none';
             document.getElementById('viewCount').innerHTML = data.TotalViewers;
             // console.log(`UPDATE STATISTICS: ${JSON.stringify(data)}`);
         });
