@@ -32,9 +32,16 @@ let sdkViewerInstance = new SdkViewer({
     onVideoErrors: (error) => {
         console.log('Video status: ', error);
 
-        errFlagG = true;
-        let errMsg = `Live stream has ended. Join us for next upcoming live streams!`;
-        errorHandler(errMsg);
+        if (error.type === 'RETRY_PLAYLIST') {
+            // errFlagG = true;
+            let errMsg = `Reconnecting live stream, please wait a moment!`;
+            errorHandler(errMsg, true);
+            console.log('Retrying to connect to presenter!')
+        } else {
+            errFlagG = true;
+            let errMsg = `Live stream has ended. Join us for next upcoming live streams!`;
+            errorHandler(errMsg, false);
+        }
 
     },
 });
@@ -63,6 +70,9 @@ function handleSDKEvents() {
     sdkViewerInstance.onEventHandler(
         'ON_UPDATE_STATISTICS', (data) => {
             console.log('UPDATE STATISTICS: ', data);
+            document.getElementById('loadingSpinner').style.display = 'none';
+            let myModapMainCust = document.getElementById('myModal');
+            myModapMainCust.style.display = 'none';
             document.getElementById('viewCount').innerHTML = data.TotalViewers;
             // console.log(`UPDATE STATISTICS: ${JSON.stringify(data)}`);
         });
@@ -75,7 +85,7 @@ function handleSDKEvents() {
     sdkViewerInstance.onEventHandler('ON_UPDATE_END_RESULT', (data) => {
         errFlagG = true;
         let errMsg = `Live stream has ended. Join us for next upcoming live streams!`;
-        errorHandler(errMsg);
+        errorHandler(errMsg, false);
 
         console.log('UPDATE END RESULT: ', data);
         console.log(`UPDATE END RESULT: ${JSON.stringify(data)}`);
@@ -152,7 +162,7 @@ function watchLiveStream() {
 
                     errFlagG = true;
                     let errMsg = 'Live stream has ended. Join us for next upcoming live streams!';
-                    errorHandler(errMsg);
+                    errorHandler(errMsg, false);
                 }
             },
             (data) => { // Open callback
@@ -206,15 +216,16 @@ function watchLiveStream() {
                 errFlagG = true;
                 let errMsg = `Livestream could not be loaded.
                 Please try again`;
-                errorHandler(errMsg);
+                errorHandler(errMsg, false);
                 console.log('CustomErr', err);
             }
     );
 
 }
 
-function errorHandler(msg) {
-    document.getElementById('playerViewWrapper').innerHTML = '<div></div>';
+function errorHandler(msg, reconFlag) {
+    reconFlag === false ? document.getElementById('playerViewWrapper').innerHTML = '<div></div>' : null;
+
 
     // let liveCapsule = document.getElementsByClassName('live-capsule')[0];
     // liveCapsule !== undefined ? liveCapsule.style.zIndex = 1 : null;
@@ -267,13 +278,13 @@ function handleVideoEvents() {
 
     sdkViewerInstance.getVideoPlayer().onEventHandler('ENDED', () => {
         let msgToShow = 'The replay has ended.';
-        errorHandler(msgToShow);
+        errorHandler(msgToShow, false);
         console.log('Video ended.');
     });
 
     sdkViewerInstance.getVideoPlayer().onEventHandler('ON_VIDEO_ENDED', () => {
         let msgToShow = 'The replay has ended.';
-        errorHandler(msgToShow);
+        errorHandler(msgToShow, false);
         console.log('Video Ended ON.');
     });
 
@@ -297,6 +308,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     // }
     window.onclick = async function (event) {
         if (event.target === modal && errFlagG === false) {
+            document.getElementById('loadingSpinner').style.display = 'none';
             modal.style.display = 'none';
             await sdkViewerInstance.getVideoPlayer().unMuteVideo();
         }
