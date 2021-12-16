@@ -32,21 +32,20 @@ let sdkViewerInstance = new SdkViewer({
     onVideoErrors: (error) => {
         console.log('Video status: ', error);
 
-        if (error.type === 'RETRY_PLAYLIST') {
-            // errFlagG = true;
-            // let errMsg = `Reconnecting live stream, please wait a moment!`;
-            
-            let myModapMainCust = document.getElementById('myModal');
-            myModapMainCust.style.display = 'block';
-            myModapMainCust.style.zIndex = 999999;
-            document.getElementById('myModalSpan').innerText = 'Reconnecting live stream, please wait a moment';
-            // errorHandler(errMsg, true);
-            console.log('Retrying to connect to presenter!')
-        } else {
-            errFlagG = true;
-            let errMsg = `Live stream has ended. Join us for next upcoming live streams!`;
-            errorHandler(errMsg, false);
-        }
+        errFlagG = true;
+        let errMsg = `Live stream has ended. Join us for next upcoming live streams!`;
+        errorHandler(errMsg, false);
+
+        // if (error.type === 'RETRY_PLAYLIST') {
+        //     // errFlagG = true;
+        //     let errMsg = `Reconnecting live stream, please wait a moment!`;
+        //     errorHandler(errMsg, true);
+        //     console.log('Retrying to connect to presenter!')
+        // } else {
+        //     errFlagG = true;
+        //     let errMsg = `Live stream has ended. Join us for next upcoming live streams!`;
+        //     errorHandler(errMsg, false);
+        // }
 
     },
 });
