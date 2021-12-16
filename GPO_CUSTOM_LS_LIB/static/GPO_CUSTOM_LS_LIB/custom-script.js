@@ -34,8 +34,13 @@ let sdkViewerInstance = new SdkViewer({
 
         if (error.type === 'RETRY_PLAYLIST') {
             // errFlagG = true;
-            let errMsg = `Reconnecting live stream, please wait a moment!`;
-            errorHandler(errMsg, true);
+            // let errMsg = `Reconnecting live stream, please wait a moment!`;
+            
+            let myModapMainCust = document.getElementById('myModal');
+            myModapMainCust.style.display = 'block';
+            myModapMainCust.style.zIndex = 999999;
+            document.getElementById('myModalSpan').innerText = 'Reconnecting live stream, please wait a moment';
+            // errorHandler(errMsg, true);
             console.log('Retrying to connect to presenter!')
         } else {
             errFlagG = true;
