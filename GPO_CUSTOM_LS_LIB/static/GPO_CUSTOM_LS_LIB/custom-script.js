@@ -31,21 +31,20 @@ let sdkViewerInstance = new SdkViewer({
     },
     onVideoErrors: (error) => {
         console.log('Video status: ', error);
+        // errFlagG = true;
+        // let errMsg = `Live stream has ended. Join us for next upcoming live streams!`;
+        // errorHandler(errMsg, false);
 
-        errFlagG = true;
-        let errMsg = `Live stream has ended. Join us for next upcoming live streams!`;
-        errorHandler(errMsg, false);
-
-        // if (error.type === 'RETRY_PLAYLIST') {
-        //     // errFlagG = true;
-        //     let errMsg = `Reconnecting live stream, please wait a moment!`;
-        //     errorHandler(errMsg, true);
-        //     console.log('Retrying to connect to presenter!')
-        // } else {
-        //     errFlagG = true;
-        //     let errMsg = `Live stream has ended. Join us for next upcoming live streams!`;
-        //     errorHandler(errMsg, false);
-        // }
+        if (error.type === 'RETRY_PLAYLIST') {
+            // errFlagG = true;
+            let errMsg = `Reconnecting live stream, please wait a moment!`;
+            errorHandler(errMsg, true);
+            console.log('Retrying to connect to presenter!')
+        } else {
+            errFlagG = true;
+            let errMsg = `Live stream has ended. Join us for next upcoming live streams!`;
+            errorHandler(errMsg, false);
+        }
 
     },
 });
@@ -277,6 +276,9 @@ function handleVideoEvents() {
     });
 
     sdkViewerInstance.getVideoPlayer().onEventHandler('RETRY_PLAYLIST', (err) => {
+        let errMsg = `Reconnecting live stream, please wait a moment!`;
+        errorHandler(errMsg, true);
+        console.log('Retrying to connect to presenter!')
         console.log(`Video error: ${JSON.stringify(err)}`, 'error');
     });
 
