@@ -482,12 +482,9 @@ function sendLiveMessage() {
             messageType: 1, // 1 for send text message
         };
         if (message.message !== '' && message.message !== null) {
-            window.ReactNativeWebView.postMessage('MSG IS NOT NULL');
-            alert('MSG IS NOT NULL');
             sdkViewerInstance.sendMessageRTM(channelChat, message, (res) => { // success callback
                 console.log(res);
                 if (res.status === 'Success') {
-                    alert('MSG STATUS IS SUCCESS');
                     document.getElementById('messageInput').value = '';
                     let msgBoxContainer = document.getElementById('messageBox');
                     msgBoxContainer.scroll({top: msgBoxContainer.scrollHeight, behavior: 'smooth'})
@@ -498,7 +495,6 @@ function sendLiveMessage() {
             });
         } else {
             console.log('Please type something!');
-            alert('Please type something!');
         }
     } else if (isGuestG === 't' || isGuestG === 'T' ||
             isGuestG === 'true' || isGuestG === 'True') {
