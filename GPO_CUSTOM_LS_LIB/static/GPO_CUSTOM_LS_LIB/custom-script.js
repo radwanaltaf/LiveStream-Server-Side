@@ -484,7 +484,9 @@ function sendLiveMessage() {
         if (message.message !== '' && message.message !== null) {
             sdkViewerInstance.sendMessageRTM(channelChat, message, (res) => { // success callback
                 console.log(res);
+                window.ReactNativeWebView.postMessage('MSG IS NOT NULL');
                 if (res.status === 'Success') {
+                    window.ReactNativeWebView.postMessage('MSG STATUS IS SUCCESS');
                     document.getElementById('messageInput').value = '';
                     let msgBoxContainer = document.getElementById('messageBox');
                     msgBoxContainer.scroll({top: msgBoxContainer.scrollHeight, behavior: 'smooth'})
