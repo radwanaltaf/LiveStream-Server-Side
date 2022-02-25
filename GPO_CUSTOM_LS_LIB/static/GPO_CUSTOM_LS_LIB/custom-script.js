@@ -40,8 +40,6 @@ let sdkViewerInstance = new SdkViewer({
             let errMsg = `Reconnecting live stream, please wait a moment!`;
             errorHandler(errMsg, true);
             console.log('Retrying to connect to presenter!')
-
-            document.getElementById('loadingSpinner').style.display = 'block';
         } else {
             errFlagG = true;
             let errMsg = `Live stream has ended. Join us for next upcoming live streams!`;
@@ -229,9 +227,7 @@ function watchLiveStream() {
 }
 
 function errorHandler(msg, reconFlag) {
-    // reconFlag === false ?
-    document.getElementById('playerViewWrapper').innerHTML = '<div></div>' 
-    // : null;
+    reconFlag === false ? document.getElementById('playerViewWrapper').innerHTML = '<div></div>' : null;
 
 
     // let liveCapsule = document.getElementsByClassName('live-capsule')[0];
@@ -255,7 +251,7 @@ function handleVideoEvents() {
     });
 
     sdkViewerInstance.getVideoPlayer().onEventHandler('TIME_UPDATE', (currentTime) => {
-        console.log('TIME UPDATE', currentTime);
+        console.log('TIME UPDAYE', currentTime);
         // console.log(`Current time video: ${currentTime}`);
     });
 
@@ -277,13 +273,6 @@ function handleVideoEvents() {
 
     sdkViewerInstance.getVideoPlayer().onEventHandler('ERROR', (err) => {
         console.log(`Video error: ${JSON.stringify(err)}`, 'error');
-
-        let errMsg = `Reconnecting live stream, please wait a moment!`;
-        errorHandler(errMsg, true);
-        console.log('Retrying to connect to presenter!')
-        console.log(`Video error: ${JSON.stringify(err)}`, 'error');
-
-        document.getElementById('loadingSpinner').style.display = 'block';
     });
 
     sdkViewerInstance.getVideoPlayer().onEventHandler('RETRY_PLAYLIST', (err) => {
@@ -291,8 +280,6 @@ function handleVideoEvents() {
         errorHandler(errMsg, true);
         console.log('Retrying to connect to presenter!')
         console.log(`Video error: ${JSON.stringify(err)}`, 'error');
-
-        document.getElementById('loadingSpinner').style.display = 'block';
     });
 
     sdkViewerInstance.getVideoPlayer().onEventHandler('ENDED', () => {
@@ -313,13 +300,6 @@ function handleVideoEvents() {
 
     sdkViewerInstance.getVideoPlayer().onEventHandler('RETRY_LOAD_VIDEO', () => {
         console.log('RETRY LOAD VIDEO!');
-
-        let errMsg = `Reconnecting live stream, please wait a moment!`;
-        errorHandler(errMsg, true);
-        console.log('Retrying to connect to presenter!')
-        console.log(`Video error: ${JSON.stringify(err)}`, 'error');
-
-        document.getElementById('loadingSpinner').style.display = 'block';
     });
 }
 
