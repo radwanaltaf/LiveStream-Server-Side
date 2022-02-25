@@ -229,7 +229,9 @@ function watchLiveStream() {
 }
 
 function errorHandler(msg, reconFlag) {
-    reconFlag === false ? document.getElementById('playerViewWrapper').innerHTML = '<div></div>' : null;
+    // reconFlag === false ?
+    document.getElementById('playerViewWrapper').innerHTML = '<div></div>' 
+    // : null;
 
 
     // let liveCapsule = document.getElementsByClassName('live-capsule')[0];
