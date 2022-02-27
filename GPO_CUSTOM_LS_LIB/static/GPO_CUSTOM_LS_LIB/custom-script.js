@@ -73,6 +73,7 @@ function handleSDKEvents() {
     sdkViewerInstance.onEventHandler(
         'ON_UPDATE_STATISTICS', (data) => {
             console.log('UPDATE STATISTICS: ', data);
+            console.log(data);
             document.getElementById('loadingSpinner').style.display = 'none';
             let myModapMainCust = document.getElementById('myModal');
             myModapMainCust.style.display = 'none';
