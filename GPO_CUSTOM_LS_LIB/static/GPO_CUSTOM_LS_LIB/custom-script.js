@@ -98,11 +98,17 @@ function handleSDKEvents() {
 
     sdkViewerInstance.onEventHandler('LOST_NETWORK', () => {
         console.log('NET ERR');
+        let errMsg = `Slow or no network connection.
+        Please check your network setting or connect to a faster networ`;
+        errorHandler(errMsg, true);
         console.log('ERROR: Your internet is lost, so RTM and video can not work, pls check it.', 'error');
     });
 
     sdkViewerInstance.onEventHandler('RECONNECT_NETWORK', () => {
         console.log('NET ERR');
+        let errMsg = `Slow or no network connection.
+        Please check your network setting or connect to a faster networ`;
+        errorHandler(errMsg, true);
         console.log(
             'Reconnected your internet, pls check and maybe you need to disconnect RTM then Reconnect to make sure RTM is keeping connection.',
             'success');
@@ -274,6 +280,8 @@ function handleVideoEvents() {
     });
 
     sdkViewerInstance.getVideoPlayer().onEventHandler('ERROR', (err) => {
+        let errMsg = `Something went wrong with the video player, please try again!`;
+        errorHandler(errMsg, true);
         console.log(`Video error: ${JSON.stringify(err)}`, 'error');
     });
 
