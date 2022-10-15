@@ -91,16 +91,16 @@ WSGI_APPLICATION = 'live_stream.wsgi.application'
 
 DATABASES = {
     # EnvPD
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'read_default_file': '/DjangoLiveStream/auth/mysql.cnf'
-        },
-    }    
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'OPTIONS': {
+    #         'read_default_file': '/DjangoLiveStream/auth/mysql.cnf'
+    #     },
+    # }    
 }
 
 
