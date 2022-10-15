@@ -98,7 +98,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'read_default_file': '/DjangoLiveStream/auth/mysql.cnf'
+            'read_default_file': '/livestream-serverside/auth/mysql.cnf'
         },
     }    
 }
