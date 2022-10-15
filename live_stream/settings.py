@@ -35,7 +35,8 @@ ALLOWED_HOSTS = [
     # getenv("APP_HOST")
     'premiumoutletslive.com',
     'www.premiumoutletslive.com',
-    '151.106.112.221'
+    '151.106.112.221',
+    '54.169.44.131'
 ]
 
 
