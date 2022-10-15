@@ -36,7 +36,7 @@ ALLOWED_HOSTS = [
     'premiumoutletslive.com',
     'www.premiumoutletslive.com',
     '151.106.112.221',
-    '54.169.44.131'
+    '54.169.44.131',
 ]
 
 
