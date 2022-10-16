@@ -142,7 +142,7 @@ USE_TZ = True
 
 # EnvPD
 # STATIC_ROOT = BASE_DIR / "staticfiles"
-STATIC_ROOT = "/DjangoLiveStream/site/public/static"
+STATIC_ROOT = "/home/ubuntu/DjangoLiveStream/site/public/static"
 STATIC_URL = '/static/'
 
 # Default primary key field type
