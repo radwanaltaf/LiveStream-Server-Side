@@ -372,7 +372,7 @@ function onAddToCartClick(post) {
 async function getAllProducts() {
     document.getElementById('dynamicContainer').innerHTML = '<div id="loadingSpinnerCart" class="loading-cart">Loading&#8230;</div>';
 
-    let response = await fetch(`https://shop.premiumoutlets.com.my/rest/GHPO/V1/productsByBrandId/${brandIdG}`)
+    let response = await fetch(`https://shop.premiumoutlets.com.my/rest/${selectedCenterG}/V1/productsByBrandId/${brandIdG}`)
     .then(handleErrors)
     .catch(
         () => {
