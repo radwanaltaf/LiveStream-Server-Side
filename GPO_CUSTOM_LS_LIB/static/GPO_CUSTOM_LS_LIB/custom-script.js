@@ -31,20 +31,10 @@ let sdkViewerInstance = new SdkViewer({
     },
     onVideoErrors: (error) => {
         console.log('Video status: ', error);
-        // errFlagG = true;
-        // let errMsg = `Live stream has ended. Join us for next upcoming live streams!`;
-        // errorHandler(errMsg, false);
 
-        if (error.type === 'RETRY_PLAYLIST') {
-            // errFlagG = true;
-            let errMsg = `Reconnecting live stream, please wait a moment!`;
-            errorHandler(errMsg, true);
-            console.log('Retrying to connect to presenter!')
-        } else {
-            errFlagG = true;
-            let errMsg = `Live stream has ended. Join us for next upcoming live streams!`;
-            errorHandler(errMsg, false);
-        }
+        errFlagG = true;
+        let errMsg = `Live stream has ended. Join us for next upcoming live streams!`;
+        errorHandler(errMsg);
 
     },
 });
@@ -55,6 +45,7 @@ let titleG = document.getElementById("title").value;
 let brandIdG = document.getElementById("brandId").value;
 let usernameG = document.getElementById("username").value;
 let isGuestG = document.getElementById("isGuest").value;
+let selectedCenterG = document.getElementById("selectedCenter").value;
 
 // Stays Same
 let passwordG = 'Testing1';
@@ -73,11 +64,6 @@ function handleSDKEvents() {
     sdkViewerInstance.onEventHandler(
         'ON_UPDATE_STATISTICS', (data) => {
             console.log('UPDATE STATISTICS: ', data);
-            console.log(data);
-            // document.getElementById('loadingSpinner').style.display = 'none';
-            let myModapMainCust = document.getElementById('myModal');
-            // myModapMainCust.style.display = 'none';
-            sdkViewerInstance.getVideoPlayer().resumeVideo();
             document.getElementById('viewCount').innerHTML = data.TotalViewers;
             // console.log(`UPDATE STATISTICS: ${JSON.stringify(data)}`);
         });
@@ -90,7 +76,7 @@ function handleSDKEvents() {
     sdkViewerInstance.onEventHandler('ON_UPDATE_END_RESULT', (data) => {
         errFlagG = true;
         let errMsg = `Live stream has ended. Join us for next upcoming live streams!`;
-        errorHandler(errMsg, false);
+        errorHandler(errMsg);
 
         console.log('UPDATE END RESULT: ', data);
         console.log(`UPDATE END RESULT: ${JSON.stringify(data)}`);
@@ -98,17 +84,11 @@ function handleSDKEvents() {
 
     sdkViewerInstance.onEventHandler('LOST_NETWORK', () => {
         console.log('NET ERR');
-        let errMsg = `Slow or no network connection.
-        Please check your network setting or connect to a faster networ`;
-        errorHandler(errMsg, true);
         console.log('ERROR: Your internet is lost, so RTM and video can not work, pls check it.', 'error');
     });
 
     sdkViewerInstance.onEventHandler('RECONNECT_NETWORK', () => {
         console.log('NET ERR');
-        let errMsg = `Slow or no network connection.
-        Please check your network setting or connect to a faster networ`;
-        errorHandler(errMsg, true);
         console.log(
             'Reconnected your internet, pls check and maybe you need to disconnect RTM then Reconnect to make sure RTM is keeping connection.',
             'success');
@@ -173,7 +153,7 @@ function watchLiveStream() {
 
                     errFlagG = true;
                     let errMsg = 'Live stream has ended. Join us for next upcoming live streams!';
-                    errorHandler(errMsg, false);
+                    errorHandler(errMsg);
                 }
             },
             (data) => { // Open callback
@@ -227,16 +207,15 @@ function watchLiveStream() {
                 errFlagG = true;
                 let errMsg = `Livestream could not be loaded.
                 Please try again`;
-                errorHandler(errMsg, false);
+                errorHandler(errMsg);
                 console.log('CustomErr', err);
             }
     );
 
 }
 
-function errorHandler(msg, reconFlag) {
-    reconFlag === false ? document.getElementById('playerViewWrapper').innerHTML = '<div></div>' : null;
-
+function errorHandler(msg) {
+    document.getElementById('playerViewWrapper').innerHTML = '<div></div>';
 
     // let liveCapsule = document.getElementsByClassName('live-capsule')[0];
     // liveCapsule !== undefined ? liveCapsule.style.zIndex = 1 : null;
@@ -280,27 +259,22 @@ function handleVideoEvents() {
     });
 
     sdkViewerInstance.getVideoPlayer().onEventHandler('ERROR', (err) => {
-        let errMsg = `Something went wrong with the video player, please try again!`;
-        errorHandler(errMsg, true);
         console.log(`Video error: ${JSON.stringify(err)}`, 'error');
     });
 
     sdkViewerInstance.getVideoPlayer().onEventHandler('RETRY_PLAYLIST', (err) => {
-        let errMsg = `Reconnecting live stream, please wait a moment!`;
-        errorHandler(errMsg, true);
-        console.log('Retrying to connect to presenter!')
         console.log(`Video error: ${JSON.stringify(err)}`, 'error');
     });
 
     sdkViewerInstance.getVideoPlayer().onEventHandler('ENDED', () => {
         let msgToShow = 'The replay has ended.';
-        errorHandler(msgToShow, false);
+        errorHandler(msgToShow);
         console.log('Video ended.');
     });
 
     sdkViewerInstance.getVideoPlayer().onEventHandler('ON_VIDEO_ENDED', () => {
         let msgToShow = 'The replay has ended.';
-        errorHandler(msgToShow, false);
+        errorHandler(msgToShow);
         console.log('Video Ended ON.');
     });
 
@@ -324,7 +298,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     // }
     window.onclick = async function (event) {
         if (event.target === modal && errFlagG === false) {
-            document.getElementById('loadingSpinner').style.display = 'none';
             modal.style.display = 'none';
             await sdkViewerInstance.getVideoPlayer().unMuteVideo();
         }
@@ -332,7 +305,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         if (event.target === document.getElementById('messageBox') ||
         event.target === document.getElementById('dynamicMsgBox') ||
         event.target === document.getElementById('dynamicMsgText')) {
-            document.getElementById('messageBox').style.height = '34vh';
+            document.getElementById('messageBox').style.height = '25vh';
             console.log(event);
             let mainCB = document.getElementsByClassName('vjs-control-bar')[0];
             mainCB !== undefined ? mainCB.style.visibility = 'visible' : null;
@@ -432,11 +405,11 @@ async function renderEachProduct() {
                     <div class="prod-desc mr-4">
                         <span class="desc-font">${post.name}</span>
                         <br>
-                        <span class="font-price mr-3">MYR ${specialPrice.value ? parseFloat(specialPrice.value).toFixed(2) : parseFloat(post.price).toFixed(2)}</span>
+                        <span class="font-price mr-3">MYR ${specialPrice.value ? ~~specialPrice.value : ~~post.price}</span>
 
                         ${discVal !== 0 ? `
                         <span class="font-ori-price">
-                        MYR ${ parseFloat(post.price).toFixed(2) }
+                        MYR ${ ~~post.price}
                         </span>` : ''}
 
                         
@@ -486,7 +459,8 @@ async function renderEachProduct() {
 // eslint-disable-next-line no-unused-vars
 function sendLiveMessage() {
     console.log('CLICK')
-    if (isGuestG === 'f' || isGuestG === 'F') {
+    if (isGuestG === false || isGuestG === 'false' ||
+        isGuestG === 'false' || isGuestG === 'False') {
         let message = {
             message: `${usernameG + ': ' + document.getElementById('messageInput').value}`,
             messageType: 1, // 1 for send text message
@@ -496,8 +470,6 @@ function sendLiveMessage() {
                 console.log(res);
                 if (res.status === 'Success') {
                     document.getElementById('messageInput').value = '';
-                    let msgBoxContainer = document.getElementById('messageBox');
-                    msgBoxContainer.scroll({top: msgBoxContainer.scrollHeight, behavior: 'smooth'})
                     document.getElementById('send-btn').disabled = true;
                     let mainCB = document.getElementsByClassName('vjs-control-bar')[0];
                     mainCB !== undefined ? mainCB.style.visibility = 'visible' : null;
@@ -506,7 +478,7 @@ function sendLiveMessage() {
         } else {
             console.log('Please type something!');
         }
-    } else if (isGuestG === 't' || isGuestG === 'T' ||
+    } else if (isGuestG === true || isGuestG === 'true' ||
             isGuestG === 'true' || isGuestG === 'True') {
         window.ReactNativeWebView.postMessage('navToLogin');
     }
