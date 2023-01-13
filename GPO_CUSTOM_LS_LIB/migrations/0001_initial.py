@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
                 ('brandIdG', models.IntegerField(max_length=10)),
                 ('usernameG', models.CharField(max_length=300)),
                 ('isGuestG', models.BooleanField()),
+                ('selectedCenterG', models.CharField(max_length=200)),
             ],
         ),
     ]
