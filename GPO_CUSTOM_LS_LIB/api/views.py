@@ -25,7 +25,7 @@ def api_create_user_view(request):
             print(serializer.data)
             # print(request.data)
             # print(serializer.data.get('isGuestG'))
-            if len(request.data) == 5:
+            if len(request.data) == 4:
                 return HttpResponse(render(request ,"GPO_CUSTOM_LS_LIB/viewer.html", {
                     "title": serializer.data.get('titleG'),
                     "brandId": serializer.data.get('brandIdG'),
