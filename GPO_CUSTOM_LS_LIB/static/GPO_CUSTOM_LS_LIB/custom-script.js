@@ -63,6 +63,9 @@ let allProdArrG;
 let streamType;
 let errFlagG = false;
 
+// For Share Func
+let streamUrlG;
+
 handleSDKEvents();
 
 sdkViewerInstance.guestLogin(null, () => {
@@ -134,6 +137,7 @@ function watchLiveStream() {
         // On Success Event Listener
         async (res) => {
             console.log(res);
+            streamUrlG = res.data.streamUrl;
             if (res.data.status === 1) {
                 streamType = 'LIVE';
             } else if (res.data.status === 2) {
@@ -559,7 +563,7 @@ function onMsgBoxClick() {
 }
 
 function onClickShareBtn() {
-    window.ReactNativeWebView.postMessage('shareBtnClicked');
+    window.ReactNativeWebView.postMessage('{"shareBtnClicked": true, "streamURL": "' + streamUrlG + '"}');
 }
 
 function handleErrors(response) {
