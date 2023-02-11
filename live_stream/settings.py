@@ -27,21 +27,27 @@ with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # True for Debugging
-# EnvPD
-DEBUG = getenv("IS_DEVELOPMENT", False)
-
-ALLOWED_HOSTS = [
+if os.getenv('DJANGO_DEVELOPMENT') == 'true':
+    DEBUG = getenv("IS_DEVELOPMENT", True)
+else:
     # EnvPD
-    # getenv("APP_HOST")
-    'premiumoutletslive.com',
-    'www.premiumoutletslive.com',
-    '151.106.112.221',
-    '54.169.44.131',
-]
+    DEBUG = getenv("IS_DEVELOPMENT", False)
 
+if os.getenv('DJANGO_DEVELOPMENT') == 'true':
+    ALLOWED_HOSTS = [
+        'localhost',
+        '127.0.0.1'
+    ]
+else:
+    ALLOWED_HOSTS = [
+        # EnvPD
+        'premiumoutletslive.com',
+        'www.premiumoutletslive.com',
+        '151.106.112.221',
+        '54.169.44.131',
+    ]
 
 # Application definition
-
 INSTALLED_APPS = [
     'GPO_CUSTOM_LS_LIB',
     'django.contrib.admin',
@@ -89,19 +95,28 @@ WSGI_APPLICATION = 'live_stream.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    # EnvPD
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+if os.getenv('DJANGO_DEVELOPMENT') == 'true':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-    # 'default': {
+else:
+    DATABASES = {
+        # EnvPD
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    #     'default': {
     #     'ENGINE': 'django.db.backends.mysql',
     #     'OPTIONS': {
     #         'read_default_file': '/DjangoLiveStream/auth/mysql.cnf'
-    #     },
-    # }    
-}
+    #         },
+    #     }  
+    }
 
 
 # Password validation
@@ -140,12 +155,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-# EnvPD
-# STATIC_ROOT = BASE_DIR / "staticfiles"
-STATIC_ROOT = "/home/ubuntu/DjangoLiveStream/site/public/static"
+if os.getenv('DJANGO_DEVELOPMENT') == 'true':
+    # EnvPD
+    STATIC_ROOT = BASE_DIR / "staticfiles"
+else:
+    STATIC_ROOT = "/home/ubuntu/DjangoLiveStream/site/public/static"
+
 STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Override production variables if DJANGO_DEVELOPMENT env variable is true
+# if os.getenv('DJANGO_DEVELOPMENT') == 'true':
+#     from settings_dev import *  # or specific overrides

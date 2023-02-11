@@ -558,6 +558,10 @@ function onMsgBoxClick() {
     mainCB !== undefined ? mainCB.style.visibility = 'hidden' : null;
 }
 
+function onClickShareBtn() {
+    window.ReactNativeWebView.postMessage('shareBtnClicked');
+}
+
 function handleErrors(response) {
     if (!response.ok) {
         console.log('ERROORRR');
