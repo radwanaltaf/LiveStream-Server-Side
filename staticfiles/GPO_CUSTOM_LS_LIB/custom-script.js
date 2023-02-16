@@ -45,6 +45,8 @@ let titleG = document.getElementById("title").value;
 let brandIdG = document.getElementById("brandId").value;
 let usernameG = document.getElementById("username").value;
 let isGuestG = document.getElementById("isGuest").value;
+let selectedCenterG = document.getElementById("selectedCenter").value;
+
 
 // Stays Same
 let passwordG = 'Testing1';

@@ -25,12 +25,13 @@ def api_create_user_view(request):
             print(serializer.data)
             # print(request.data)
             # print(serializer.data.get('isGuestG'))
-            if len(request.data) == 4:
+            if len(request.data) == 5:
                 return HttpResponse(render(request ,"GPO_CUSTOM_LS_LIB/viewer.html", {
                     "title": serializer.data.get('titleG'),
                     "brandId": serializer.data.get('brandIdG'),
                     "username": serializer.data.get('usernameG'),
                     "isGuest": 't' if serializer.data.get('isGuestG') == True else 'f',
+                    "selectedCenter": serializer.data.get('selectedCenterG'),
                 }))
             print(request.data) 
             return Response({"ErrorMessage": 'Required Fields Missing'}, status = status.HTTP_400_BAD_REQUEST)
